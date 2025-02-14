@@ -27,7 +27,7 @@
 *                           DETAILS INCLUDING LAST REFERENCED DATE.   *
 *                                                                     *
 *                           CREATES REPORT WHICH CAN BE CSV           *
-*                           CREATED INPUT CARDS FOR IDCAMS DELETE     *         
+*                           CREATES INPUT CARDS FOR IDCAMS DELETE     *         
 *                                                                     *
 ***********************************************************************
          IHASAVER DSECT=YES,SAVER=YES,SAVF4SA=YES,SAVF5SA=YES,TITLE=NO

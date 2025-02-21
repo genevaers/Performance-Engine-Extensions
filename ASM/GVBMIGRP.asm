@@ -247,7 +247,7 @@ A000106  EQU   *
          J     A000109
 *
 A000108  EQU   *
-         wto 'too many sub parameters or commas'
+         wto 'GVBMIGRP: too many sub parameters or commas'
          MVC   WKRETC,=F'12'
          J     DONE
 A000109  EQU   *
@@ -262,15 +262,15 @@ D1       USING IHADCB,OUTDCB
          STY   R0,D1.DCBDCBE
 *
          MVC   WKPRINT,SPACES
-         MVC   WKPRINT(32),=CL32'MDTEST: BEING EXECUTED WITH DD: '
-         MVC   WKPRINT+32(8),D1.DCBDDNAM
+         MVC   WKPRINT(32),=CL32'GVBMIGRP: BEING EXECUTED WITH DD: '
+         MVC   WKPRINT+34(8),D1.DCBDDNAM
 *
          LAY   R2,OUTDCB
          MVC   WKREENT(8),OPENPARM
          OPEN  ((R2),(OUTPUT)),MODE=31,MF=(E,WKREENT)
          TM    D1.DCBOFLGS,DCBOFOPN      SUCCESSFULLY OPENED  ??
          JO    MAIN_100                  YES - BYPASS ABEND
-         WTO 'MDTEST: DDPRINT OPEN FAILED'
+         WTO 'GVBMIGRP: DDPRINT OPEN FAILED'
          MVC   WKRETC,=F'8'
          J     DONEDONE
 *
@@ -347,20 +347,20 @@ A00163   EQU   *
          PUT   (R2),(R0)
 *
          MVC   WKPRINT,SPACES
-         MVC   WKPRINT(21),=CL21'MDTEST: HLQ=         '
-         MVC   WKPRINT+12(8),WKREFHLQ
+         MVC   WKPRINT(21),=CL21'GVBMIGRP: HLQ=         '
+         MVC   WKPRINT+14(8),WKREFHLQ
          LA    R2,OUTDCB
          LA    R0,WKPRINT
          PUT   (R2),(R0)
          MVC   WKPRINT,SPACES
-         MVC   WKPRINT(22),=CL22'MDTEST: DATE=         '
-         MVC   WKPRINT+13(8),WKFROMDT
+         MVC   WKPRINT(22),=CL22'GVBMIGRP: DATE=         '
+         MVC   WKPRINT+15(8),WKFROMDT
          LA    R2,OUTDCB
          LA    R0,WKPRINT
          PUT   (R2),(R0)
          MVC   WKPRINT,SPACES
-         MVC   WKPRINT(22),=CL22'MDTEST: UPSI=         '
-         MVC   WKPRINT+13(8),WKUPSI
+         MVC   WKPRINT(22),=CL22'GVBMIGRP: UPSI=         '
+         MVC   WKPRINT+15(8),WKUPSI
          LA    R2,OUTDCB
          LA    R0,WKPRINT
          PUT   (R2),(R0)
@@ -386,7 +386,7 @@ A00170   EQU   *
          JZ    A0010
          C     R15,=F'20'
          JNE   A0009
-         WTO 'Invalid date value provided for input (invalid YYYYMMDD)'
+         WTO 'GVBMIGRP: Invalid date value provided (invalid YYYYMMDD)'
          MVC   WKRETC,=F'20'
          J     DONE
 A0009    EQU   *
@@ -418,7 +418,7 @@ D2       USING IHADCB,INDCB
          OPEN  ((R2),(INPUT)),MODE=31,MF=(E,WKREENT)
          TM    D2.DCBOFLGS,DCBOFOPN      SUCCESSFULLY OPENED  ??
          JO    A0098                     YES - BYPASS ABEND
-         WTO 'MDTEST: DDINPUT OPEN FAILED'
+         WTO 'GVBMIGRP: DDINPUT OPEN FAILED'
          MVC   WKRETC,=F'8'
          J     A0191
 *
@@ -442,7 +442,7 @@ D3       USING IHADCB,DELDCB
          OPEN  ((R2),(OUTPUT)),MODE=31,MF=(E,WKREENT)
          TM    D3.DCBOFLGS,DCBOFOPN      SUCCESSFULLY OPENED  ??
          JO    A0100                     YES - BYPASS ABEND
-         WTO 'MDTEST: DDDELETE OPEN FAILED'
+         WTO 'GVBMIGRP: DDDELETE OPEN FAILED'
          MVC   WKRETC,=F'8'
          J     DONE010
 *
@@ -667,29 +667,29 @@ A0191    EQU   *
          LA    R0,WKPRINT
          PUT   (R2),(R0)
 *
-         MVC   WKPRINT(85),=CL85'MDTEST: SELECTED XXXXXXX OUT OF XXXXXX+
-               X TYPE M RECORDS LAST REFRENCED BEFORE: XXXXXXXX'
+         MVC   WKPRINT(85),=CL85'GVBMIGRP: SELECTED XXXXXXX OUT OF XXXX+
+               XXX TYPE M RECORDS LAST REFRENCED BEFORE: XXXXXXXX'
          L     R7,WKSELCT
          CVD   R7,DBLWORK
          OI    DBLWORK+L'DBLWORK-1,X'0F'
          MVC   DBLWORK2,NUMMASK
          ED    DBLWORK2,DBLWORK+4
-         MVC   WKPRINT+16(8),DBLWORK2 (61)
+         MVC   WKPRINT+18(8),DBLWORK2 (61)
          L     R8,WKACTCT
          CVD   R8,DBLWORK
          OI    DBLWORK+L'DBLWORK-1,X'0F'
          MVC   DBLWORK2,NUMMASK
          ED    DBLWORK2,DBLWORK+4
-         MVC   WKPRINT+31(8),DBLWORK2 (61)
-         MVC   WKPRINT+78(8),WKFROMDT
+         MVC   WKPRINT+33(8),DBLWORK2 (61)
+         MVC   WKPRINT+80(8),WKFROMDT
          LA    R2,OUTDCB
          LA    R0,WKPRINT
          PUT   (R2),(R0)
 *
 *
          MVC   WKPRINT,SPACES
-         MVC   WKPRINT(8),=CL8'MDTEST: '
-         MVC   WKPRINT+8(09),=CL9'COMPLETED'
+         MVC   WKPRINT(8),=CL8'GVBMIGRP: '
+         MVC   WKPRINT+10(09),=CL9'COMPLETED'
          LA    R2,OUTDCB
          LA    R0,WKPRINT
          PUT   (R2),(R0)
@@ -752,7 +752,7 @@ SUBDATE  DS    0H
          AGHI  R2,-5
          C     R2,=F'8'          MUST BE YYYYMMDD (LENGTH 8)
          JE    C00010
-         WTO 'REFERENCE DATE MUST BE YYYYMMDD'
+         WTO 'GVBMIGRP: REFERENCE DATE MUST BE YYYYMMDD FORMAT'
          J     C00016
 C00010   EQU   *
          BCTR  R2,0
@@ -771,7 +771,7 @@ C00012   EQU   *
          J     C00016
 C00014   EQU   *
          XC    WKFROMDT,WKFROMDT
-         WTO 'DATE MUST CONTAIN NUMBERS'
+         WTO 'GVBMIGRP: DATE MUST CONTAIN NUMBERS (YYYYMMDD)'
 C00016   EQU   *
 *
          l     r13,sva2+4
@@ -794,7 +794,7 @@ SUBUPSI  DS    0H
          AGHI  R2,-5
          C     R2,=F'8'          UPSI MUST BE BBBBBBBB (LENGTH 8)
          JE    U00010
-         WTO 'UPSI MUST BE BBBBBBBB (8 BITS)'
+         WTO 'GVBMIGRP: UPSI MUST BE BBBBBBBB (8 BITS)'
          J     U00016
 U00010   EQU   *
          BCTR  R2,0
@@ -824,7 +824,7 @@ U00013   EQU   *
 U00014   EQU   *
          XC    WKUPSI,WKUPSI
          XC    WKUBYTE,WKUBYTE
-         WTO 'UPSI MUST CONTAIN NUMBERS ZERO AND ONE'
+         WTO 'GVBMIGRP: UPSI MUST CONTAIN NUMBERS ZERO AND ONE'
 U00016   EQU   *
 *
          l     r13,sva2+4

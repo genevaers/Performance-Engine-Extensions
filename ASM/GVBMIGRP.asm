@@ -470,7 +470,7 @@ A00172   EQU   *
          MVC   WKLRECL+3(5),=C'LRECL'
          MVC   WKLBLKL+3(5),=C'BLKSZ'
          MVC   WKLEVEL(3),=C'MIG'
-         MVC   WKRDAT+1(5),=C'JDATE'
+         MVC   WKRDAT(5),=C'JDATE'
          LA    R2,OUTDCB
          LA    R0,WKPRINT
          PUT   (R2),(R0)
@@ -485,7 +485,7 @@ A00172   EQU   *
          MVC   WKLRECL+3(5),=C'====='
          MVC   WKLBLKL+3(5),=C'====='
          MVC   WKLEVEL(4),=C'===='
-         MVC   WKRDAT+1(7),=C'======='
+         MVC   WKRDAT(8),=C'========'
          LA    R2,OUTDCB
          LA    R0,WKPRINT
          PUT   (R2),(R0)
@@ -513,7 +513,7 @@ A0110    EQU   *                       --LOOP FOR ALL RECORDS
          MVC   WKTYPE,DCURCTYP
          STG   R0,DBLWORK
          OI    DBLWORK+L'DBLWORK-1,X'0F'
-         MVC   DBLWORK2,NUMMASK
+         MVC   DBLWORK2,NUMMSK+8
          ED    DBLWORK2,DBLWORK+4
          MVC   WKRDAT,DBLWORK2    (8)
 *
@@ -882,7 +882,7 @@ SPACES   DC    CL256' '
 *
          LTORG ,
 *
-NUMMSK   DC    XL12'402020202020202020202021'
+NUMMSK   DC    XL16'4020202020202020202020204B202021'
 NUMMASK  DC    XL08'4020202020202120'
 PATTERN  DC X'202020202020202020202020202020 '
 ZEROES   DC    80XL1'00'

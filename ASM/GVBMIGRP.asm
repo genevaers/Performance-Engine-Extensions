@@ -103,8 +103,9 @@ WKSELCT  DS    F
 WKACTCT  DS    F
          DS    F
 *
-WKREFHLQ DS    CL9
+WKREFHLQ DS    CL17
          DS    XL3
+WKREFHLQL DS   F
 WKREFDAT DS    XL4             DERIVED REF DATE IS YYYYDDD (PACKED)
 WKFROMDT DS    CL8             INPUT FROM DATE IS YYYYMMDD (CHAR)
 WORKDTEJ DS   0XL16
@@ -348,7 +349,7 @@ A00163   EQU   *
 *
          MVC   WKPRINT,SPACES
          MVC   WKPRINT(21),=CL21'GVBMIGRP: HLQ=         '
-         MVC   WKPRINT+14(8),WKREFHLQ
+         MVC   WKPRINT+14(l'WKREFHLQ),WKREFHLQ
          LA    R2,OUTDCB
          LA    R0,WKPRINT
          PUT   (R2),(R0)
@@ -365,10 +366,6 @@ A00163   EQU   *
          LA    R0,WKPRINT
          PUT   (R2),(R0)
 A00170   EQU   *
-*
-**       XR    R0,R0
-**       IC    R0,WKUBYTE
-**       DC H'0'
 *
 *        OBTAIN JULIAN DATE FROM VALUE
 *
@@ -401,9 +398,6 @@ A0010    EQU   *
          SLL   R0,4
          O     R0,=XL4'0000000F'
          ST    R0,WKREFDAT
-*        DC H'0'
-*
-*
 *
 *      OPEN DCOLLECT INPUT FILE
          LA    R14,INFILE                COPY MODEL   DCB
@@ -507,7 +501,9 @@ A0110    EQU   *                       --LOOP FOR ALL RECORDS
          CLC   DCURCTYP,=CL2'M '         IF IT'S A MIG RECORD
          JNE   A0180
 *        CLC   UMDSNAM(5),=CL5'GEBT.'
-         CLC   UMDSNAM(5),WKREFHLQ       IF HLQ IS A MATCH THEN
+         L     R2,WKREFHLQL
+         EX    R2,EXECLC
+*        CLC   UMDSNAM(5),WKREFHLQ       IF HLQ IS A MATCH THEN
          JNE   A0180
          LA    R8,1(,R8)
          LLGT  R0,UMLRFDT
@@ -730,6 +726,7 @@ SUBHLQ   DS    0H
          LA    R14,WKREFHLQ
          LA    R1,4(,R1)
          EX    R2,MVCR14R1
+         ST    R2,WKREFHLQL
 B00016   EQU   *
 *
          l     r13,sva2+4
@@ -835,6 +832,8 @@ U00016   EQU   *
 *
 static   loctr ,
 *
+         DS    0D
+EXECLC   CLC   UMDSNAM(0),WKREFHLQ
          DS    0D
 VAROI    OI    WKUBYTE,X'00'      * * * * E X E C U T E D * * * *
          DS    0D

@@ -500,10 +500,8 @@ A0110    EQU   *                       --LOOP FOR ALL RECORDS
          GET   INDCB,DRECORD
          CLC   DCURCTYP,=CL2'M '         IF IT'S A MIG RECORD
          JNE   A0180
-*        CLC   UMDSNAM(5),=CL5'GEBT.'
          L     R2,WKREFHLQL
          EX    R2,EXECLC
-*        CLC   UMDSNAM(5),WKREFHLQ       IF HLQ IS A MATCH THEN
          JNE   A0180
          LA    R8,1(,R8)
          LLGT  R0,UMLRFDT
@@ -684,7 +682,7 @@ A0191    EQU   *
 *
 *
          MVC   WKPRINT,SPACES
-         MVC   WKPRINT(8),=CL8'GVBMIGRP: '
+         MVC   WKPRINT(9),=CL9'GVBMIGRP:'
          MVC   WKPRINT+10(09),=CL9'COMPLETED'
          LA    R2,OUTDCB
          LA    R0,WKPRINT

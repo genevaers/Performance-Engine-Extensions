@@ -272,7 +272,7 @@ D1       USING IHADCB,OUTDCB
          JO    MAIN_100                  YES - BYPASS ABEND
          WTO 'MDTEST: DDPRINT OPEN FAILED'
          MVC   WKRETC,=F'8'
-         J     DONE
+         J     DONEDONE
 *
 *                                                                @I1015
 MAIN_100 EQU   *
@@ -420,7 +420,7 @@ D2       USING IHADCB,INDCB
          JO    A0098                     YES - BYPASS ABEND
          WTO 'MDTEST: DDINPUT OPEN FAILED'
          MVC   WKRETC,=F'8'
-         J     DONE
+         J     A0191
 *
 *
 *      OPEN IDCAMS DELETE FILE CREATED
@@ -444,7 +444,7 @@ D3       USING IHADCB,DELDCB
          JO    A0100                     YES - BYPASS ABEND
          WTO 'MDTEST: DDDELETE OPEN FAILED'
          MVC   WKRETC,=F'8'
-         J     DONE
+         J     DONE010
 *
 *
 A0100    EQU   *
@@ -646,10 +646,20 @@ A0190    EQU   *
          ST    R7,WKSELCT
          ST    R8,WKACTCT
 *
+         TM    WKUBYTE,PURGEFIL
+         JNO   DONE010
+         TM    D3.DCBOFLGS,DCBOFOPN      SUCCESSFULLY OPENED  ??
+         JNO   DONERET                   NO - BYPASS CLOSE
+         LAY   R2,DELDCB
+         MVC   WKREENT(8),OPENPARM
+         CLOSE ((R2)),MODE=31,MF=(E,WKREENT)
+*
+DONE010  EQU   *
          LAY   R2,INDCB
          CLOSE ((R2)),MODE=31,MF=(E,WKREENT)
 *
 *
+A0191    EQU   *
          TM    WKUBYTE,PURGECSV
          JO    A0192
          MVC   WKPRINT,SPACES
@@ -689,15 +699,6 @@ A0192    EQU   *
 *        RETURN TO CALLER
 *
 DONE     EQU   *                         RETURN TO CALLER
-         TM    WKUBYTE,PURGEFIL
-         JNO   DONE010
-         TM    D3.DCBOFLGS,DCBOFOPN      SUCCESSFULLY OPENED  ??
-         JNO   DONERET                   NO - BYPASS CLOSE
-         LAY   R2,DELDCB
-         MVC   WKREENT(8),OPENPARM
-         CLOSE ((R2)),MODE=31,MF=(E,WKREENT)
-*
-DONE010  EQU   *
          LAY   R2,OUTDCB
          MVC   WKREENT(8),OPENPARM
          CLOSE ((R2)),MODE=31,MF=(E,WKREENT)

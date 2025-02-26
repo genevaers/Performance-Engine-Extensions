@@ -238,21 +238,21 @@ CHAIN    EQU   *
 ***********************************************************************
 MAINLINE EQU   *                                                       
 ***********************************************************************
-*  CHECK FOR OPEN PHASE, RETURN IF SO                                 *
+*  CHECK FOR OPEN, CLOSE READ PHASES, RETURN IF SO                    *
 ***********************************************************************
          CLI   GPPHASE,C'O'       TEST FOR OPEN PHASE                  
          JE    RETURN0            NOTHING TO DO                        
          CLI   GPPHASE,C'R'       TEST FOR READ PHASE                  
          JE    RETURN0            NOTHING TO DO                        
          CLI   GPPHASE,C'C'       TEST FOR CLOSE PHASE                 
-         JNE   RETURN0            NOTHING TO DO                        
+         JE    RETURN0            NOTHING TO DO                        
 *                                                                      
 ***********************************************************************
 *    TERM PHASE PROCESSING
 ***********************************************************************
 *
-         CLC   GPTHRDNO,=H'1'
-         JNE   RETURN0
+*         CLC   GPTHRDNO,=H'1'
+*         JNE   RETURN0
 *
          TM    WKSTAT1,X'80'
          JO    RETURN0

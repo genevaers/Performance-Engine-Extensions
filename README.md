@@ -51,6 +51,8 @@ GVBXR5   -- ASM read exit used to correlate both above results and produce repor
 
 The JCL to run Performance Engine with these exits is: DEMOXD1, DEMOXD2, DEMOXD3, DEMOXD4, DEMOXD1, DEMOXD2, DEMOXD3, DEMOXD4
 
+GVBXWRPT -- Write exit to produce report of the different READ, WRITE and LOOKUP exits in a GenevaERS pass
+
 
 ## Example utility routines available for GenevaERS Performance Engine Exits
 
@@ -96,7 +98,9 @@ MLOADVS  -- COBOL program to load customer file VSAM cluster (see BLDLOAD to bui
 
 MBRSEVS  -- COBOL program to read customer file VSAM cluster (see BLDBRWS to build, RUNBRSE for run job)
 
+GVBMIGRP -- ASM source code to produce report of migrated datasets
 
+BLDMIGRP -- JCL to assemble GVBMIGRP
 
-
+RUNMIGRP -- JCL to produce report of migrated datasets
 

@@ -1,4 +1,4 @@
-//RUNMIGRP JOB (ACCT),'Mig Report',
+//RUNMIGRP JOB (ACCT),'Mig Delete',
 //          NOTIFY=&SYSUID.,
 //          REGION=0M,
 //          CLASS=A,
@@ -25,30 +25,16 @@
 //* See the License for the specific language governing permissions
 //* and limitations under the License.
 //*
+//*********************************************************************
+//*   RUN DELETION OF SELECTED MIGRATED DATASETS
+//*********************************************************************
+//*
 //         EXPORT SYMLIST=*
 //*
 //*        SET HLQ=<YOUR-TSO-PREFIX>
 //         SET MLQ=GVBDEMO
 //*
-//*********************************************************************
-//*  PROCESS DCOLLECT DATASET FOR MIGRATED FILES                       
-//*********************************************************************
+//DELLIB   EXEC PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//SYSIN    DD DISP=SHR,DSN=&HLQ..&MLQ..D2025156.SYSTSIN.STAR
 //*
-//GVBMRCC EXEC PGM=GVBMIGRP,
-//            PARM='HLQ=GEBT.,DATE=20221101,UPSI=11000010'
-//*
-//STEPLIB  DD DISP=SHR,DSN=&HLQ..&MLQ..GVBLOAD
-//*
-//DDINPUT  DD DISP=SHR,DSN=&HLQ..&MLQ..D2025156
-//*
-//DDPRINT  DD SYSOUT=*
-//*
-//DDDELETE DD DISP=(,CATLG,KEEP),DSN=&HLQ..&MLQ..D2025156.SYSTSIN.STAR,
-//            SPACE=(TRK,(10,10)),
-//            UNIT=SYSDA
-//*
-//SYSOUT   DD SYSOUT=*
-//*
-//SYSUDUMP DD SYSOUT=*
-//DDPRIN   DD SYSOUT=*
-//DDDRUCK  DD SYSOUT=*

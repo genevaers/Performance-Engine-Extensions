@@ -26,7 +26,9 @@
 //* and limitations under the License.                               
 //*                                                                   
 //*********************************************************************
-//*   COMPILE AND LINK MIGRATION DATASET REPORT
+//* 
+//*   RUN HSM DCOLLECT
+//* 
 //*********************************************************************
 //*
 //         EXPORT SYMLIST=*

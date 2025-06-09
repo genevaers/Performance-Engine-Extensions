@@ -1,4 +1,4 @@
-//RUNMIGRP JOB (ACCT),'Mig Delete',
+//DELMIGS JOB (ACCT),'Mig Delete',
 //          NOTIFY=&SYSUID.,
 //          REGION=0M,
 //          CLASS=A,

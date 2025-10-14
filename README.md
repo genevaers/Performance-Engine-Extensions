@@ -102,5 +102,8 @@ GVBMIGRP -- ASM source code to produce report of migrated datasets
 
 BLDMIGRP -- JCL to assemble GVBMIGRP
 
-RUNMIGRP -- JCL to produce report of migrated datasets
+RUNDCOL  -- JCL to produce DCOLLECT report
 
+RUNMIGRP -- JCL to produce report of migrated datasets from DCOLLECT report
+
+DELMIGRP -- JCL to delete selected migrated datasets

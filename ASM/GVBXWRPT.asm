@@ -34,6 +34,11 @@
 *                                                                     *
 *  CALLED MODULES: IBM BINDER FAST API IEWBFDAT                       *
 *                                                                     *
+*  INVOKED: By GenevaERS View as Write exit.                          *
+*                                                                     *
+*  OUTPUT :                                                           *
+*   //EXTRXRPT DD SYSOUT=* or disk file where LRECL=125,RECFM=FB      * 
+*                                                                     *
 ***********************************************************************
                         EJECT                                          
 *                                                                      
